@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'todo/css/bootstrap.css' %}">
+  <title>首页</title>
+
+</head>
+<body>
+  <h1 align="center">todo</h1>
+  <ul>
+    {% for q in x %}
+    <p align="center"><a href="{% url 'todo:detail' q.id %}"> 内容：{{ q.content }} 发布时间：{{ q.creat_time }} 状态：{{ q.status }}</a></p>
+    {% empty %}
+      <li>列表为空</li>
+    {% endfor %}
+  </ul>
+
+  <div class="form-group-lg" align="center">
+
+  <form action="{% url "todo:create"  %}" method="post">
+    {% csrf_token %}
+    <textarea rows="5" cols="50" placeholder="请输入待办事项" name="content"></textarea>
+    <br>
+    <button type="submit" class="btn btn-success btn-lg">添加</button>
+  </form>
+  </div>
+</body>
+</html>

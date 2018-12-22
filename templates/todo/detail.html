@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'todo/css/bootstrap.css' %}">
+  <title>详情页</title>
+
+</head>
+<body>
+    <div>
+      <table class="table table-striped">
+        <tr>
+          <td>内容</td>
+          <td>发布时间</td>
+          <td>完成时间</td>
+          <td>状态</td>
+        </tr>
+        {% if  x.status == False %}
+        <tr>
+          <td>{{ x.content }}</td>
+          <td>{{ x.creat_time }}</td>
+          <td>{{ x.finish_time }}</td>
+          <td>未完成</td>
+        </tr>
+        {% elif x.status == True %}
+          <tr>
+          <td>{{ x.content }}</td>
+          <td>{{ x.creat_time }}</td>
+          <td>{{ x.finish_time }}</td>
+          <td>完成</td>
+          </tr>
+        {% else %}
+            <li>列表为空</li>
+        {% endif %}
+      </table>
+    </div>
+    <div align="center">
+          <a href="{% url 'todo:finish' x.id %}"><button type="button" class="btn btn-success navbar-btn" >完成</button></a>
+        <a href="{% url 'todo:cancel' x.id %}">
+        <button type="button" class="btn btn-success navbar-btn">取消</button></a>
+    </div>
+</body>
+</html>
